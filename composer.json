@@ -1,0 +1,28 @@
+{
+  "name": "bu4ak/roles",
+  "keywords": [
+    "laravel",
+    "roles"
+  ],
+  "license": "MIT",
+  "version": "1.0.0",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "bu4ak",
+      "email": "igorbu4@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Bu4ak\\Roles\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Bu4ak\\Roles\\RolesServiceProvider"
+      ]
+    }
+  }
+}
