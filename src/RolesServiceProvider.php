@@ -2,9 +2,9 @@
 
 namespace Bu4ak\Roles;
 
-use Bu4ak\Roles\Middleware\Admin;
-use Bu4ak\Roles\Middleware\Manager;
-use Bu4ak\Roles\Middleware\User;
+use Bu4ak\Roles\Middleware\IsAdmin;
+use Bu4ak\Roles\Middleware\IsManager;
+use Bu4ak\Roles\Middleware\IsUser;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -21,13 +21,13 @@ class RolesServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->app['router']->aliasMiddleware('admin', Admin::class);
-        $this->app['router']->aliasMiddleware('manager', Manager::class);
-        $this->app['router']->aliasMiddleware('user', User::class);
+        $this->app['router']->aliasMiddleware('admin', IsAdmin::class);
+        $this->app['router']->aliasMiddleware('manager', IsManager::class);
+        $this->app['router']->aliasMiddleware('user', IsUser::class);
 
         $this->publishes(
             [
-                __DIR__.'/database/migrations/' => database_path('/migrations'),
+                __DIR__ . '/database/migrations/' => database_path('/migrations'),
             ],
             'migrations'
         );

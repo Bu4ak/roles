@@ -4,7 +4,8 @@ namespace Bu4ak\Roles\Middleware;
 
 use Closure;
 use Exception;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Auth\Factory as Auth;
+use function abort;
 
 /**
  * Class BaseMiddleware.
@@ -12,23 +13,28 @@ use Illuminate\Support\Facades\Auth;
 class BaseMiddleware
 {
     /**
+     * The authentication factory instance.
+     *
+     * @var \Illuminate\Contracts\Auth\Factory
+     */
+    protected $auth;
+    /**
      * @var string
      */
     private $methodName;
 
-    /**
-     * BaseMiddleware constructor.
-     */
-    public function __construct()
+    public function __construct(Auth $auth)
     {
-        $this->methodName = 'is'.class_basename($this);
+        $this->auth = $auth;
+        $this->methodName = lcfirst(class_basename($this));
     }
+
 
     /**
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * @return mixed
      *
@@ -36,13 +42,12 @@ class BaseMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!isset(Auth::user()->role_id)) {
-            throw new Exception('User don\'t has role_id property.');
+        $this->auth->authenticate();
+
+        if (!$request->user()->{$this->methodName}()) {
+            abort(403, 'Forbidden');
         }
 
-        if (Auth::check() && Auth::user()->{$this->methodName}()) {
-            return $next($request);
-        }
-        return response(['error' => 'permission denied'], 403);
+        return $next($request);
     }
 }
