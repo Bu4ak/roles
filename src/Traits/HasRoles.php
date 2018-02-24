@@ -11,32 +11,38 @@ use Exception;
 trait HasRoles
 {
     /**
-     * @return bool
      * @throws Exception
+     *
+     * @return bool
      */
     public function isAdmin(): bool
     {
         $this->checkRoleIdProp();
+
         return $this->role_id === RoleType::ADMIN;
     }
 
     /**
-     * @return bool
      * @throws Exception
+     *
+     * @return bool
      */
     public function isManager(): bool
     {
         $this->checkRoleIdProp();
+
         return $this->role_id >= RoleType::MANAGER;
     }
 
     /**
-     * @return bool
      * @throws Exception
+     *
+     * @return bool
      */
     public function isUser(): bool
     {
         $this->checkRoleIdProp();
+
         return $this->role_id === RoleType::USER;
     }
 
