@@ -29,16 +29,15 @@ class BaseMiddleware
         $this->methodName = lcfirst(class_basename($this));
     }
 
-
     /**
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     *
-     * @return mixed
+     * @param \Closure                 $next
      *
      * @throws Exception
+     *
+     * @return mixed
      */
     public function handle($request, Closure $next)
     {
