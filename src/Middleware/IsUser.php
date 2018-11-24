@@ -3,7 +3,7 @@
 namespace Bu4ak\Roles\Middleware;
 
 /**
- * Class User.
+ * Class IsUser.
  */
 class IsUser extends BaseMiddleware
 {

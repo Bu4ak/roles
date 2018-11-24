@@ -12,14 +12,7 @@ use Illuminate\Support\ServiceProvider;
  */
 class RolesServiceProvider extends ServiceProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    //    protected $defer = true;
-
-    public function boot()
+    public function boot(): void
     {
         $this->app['router']->aliasMiddleware('admin', IsAdmin::class);
         $this->app['router']->aliasMiddleware('manager', IsManager::class);

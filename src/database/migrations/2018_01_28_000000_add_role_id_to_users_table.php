@@ -14,14 +14,11 @@ class AddRoleIdToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table(
-            'users',
-            function ($table) {
-                $table->unsignedTinyInteger('role_id')
-                    ->after('id')
-                    ->default(RoleType::USER);
-            }
-        );
+        Schema::table('users', function ($table) {
+            $table->unsignedTinyInteger('role_id')
+                ->after('id')
+                ->default(RoleType::USER);
+        });
     }
 
     /**
@@ -29,11 +26,8 @@ class AddRoleIdToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table(
-            'users',
-            function ($table) {
-                $table->dropColumn('role_id');
-            }
-        );
+        Schema::table('users', function ($table) {
+            $table->dropColumn('role_id');
+        });
     }
 }

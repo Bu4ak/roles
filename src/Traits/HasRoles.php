@@ -7,6 +7,8 @@ use Exception;
 
 /**
  * Trait HasRoles.
+ *
+ * @property int $role_id
  */
 trait HasRoles
 {
@@ -17,8 +19,6 @@ trait HasRoles
      */
     public function isAdmin(): bool
     {
-        $this->checkRoleIdProp();
-
         return $this->role_id === RoleType::ADMIN;
     }
 
@@ -29,8 +29,6 @@ trait HasRoles
      */
     public function isManager(): bool
     {
-        $this->checkRoleIdProp();
-
         return $this->role_id >= RoleType::MANAGER;
     }
 
@@ -41,18 +39,15 @@ trait HasRoles
      */
     public function isUser(): bool
     {
-        $this->checkRoleIdProp();
-
         return $this->role_id === RoleType::USER;
     }
 
-    /**
-     * @throws Exception
-     */
-    private function checkRoleIdProp()
+    public function getRoleIdAttribute(): int
     {
-        if (!isset($this->role_id)) {
-            throw new Exception('User don\'t has role_id property.');
+        if (!isset($this->attributes['role_id'])) {
+            throw new \RuntimeException("User don't has `role_id` property.");
         }
+
+        return (int)$this->attributes['role_id'];
     }
 }

@@ -10,15 +10,15 @@ class RoleType
     /**
      * Base user role.
      */
-    const USER = 0;
+    public const USER = 0;
 
     /**
      * Manager role.
      */
-    const MANAGER = 1;
+    public const MANAGER = 1;
 
     /**
      * Admin role. Also has access to mangers routes.
      */
-    const ADMIN = 2;
+    public const ADMIN = 2;
 }

@@ -3,7 +3,7 @@
 namespace Bu4ak\Roles\Middleware;
 
 /**
- * Class Manager.
+ * Class IsManager.
  */
 class IsManager extends BaseMiddleware
 {

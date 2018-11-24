@@ -26,6 +26,7 @@ class BaseMiddleware
     public function __construct(Auth $auth)
     {
         $this->auth = $auth;
+        // Bu4ak\Roles\Middleware\IsUser -> IsUser -> isUser
         $this->methodName = lcfirst(class_basename($this));
     }
 
@@ -33,7 +34,7 @@ class BaseMiddleware
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * @throws Exception
      *
@@ -43,10 +44,10 @@ class BaseMiddleware
     {
         $this->auth->authenticate();
 
-        if (!$request->user()->{$this->methodName}()) {
-            abort(403, 'Forbidden');
+        if ($request->user()->{$this->methodName}()) {
+            return $next($request);
         }
-
-        return $next($request);
+        
+        abort(403, 'Forbidden');
     }
 }
