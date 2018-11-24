@@ -11,7 +11,7 @@
 set admin role to user:
 ```php
 $user = User::first();
-$user->role_id = RoleType::ADMIN; 
+$user->role_id = RoleType::ADMIN; // MANAGER or USER
 $user->save();
 ```
 and add middleware `admin` (`manager` or `user`) to route:
