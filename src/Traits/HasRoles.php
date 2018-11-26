@@ -42,6 +42,9 @@ trait HasRoles
         return $this->role_id === RoleType::USER;
     }
 
+    /**
+     * @return int
+     */
     public function getRoleIdAttribute(): int
     {
         if (!isset($this->attributes['role_id'])) {
@@ -49,5 +52,16 @@ trait HasRoles
         }
 
         return (int)$this->attributes['role_id'];
+    }
+
+    /**
+     * @param int $roleId
+     * @return bool
+     */
+    public function assignRole(int $roleId): bool
+    {
+        $this->role_id = $roleId;
+
+        return $this->save();
     }
 }
