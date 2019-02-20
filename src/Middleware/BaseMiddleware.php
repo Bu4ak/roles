@@ -18,6 +18,7 @@ class BaseMiddleware
      * @var \Illuminate\Contracts\Auth\Factory
      */
     protected $auth;
+
     /**
      * @var string
      */
@@ -47,7 +48,7 @@ class BaseMiddleware
         if ($request->user()->{$this->methodName}()) {
             return $next($request);
         }
-        
+
         abort(403, 'Forbidden');
     }
 }

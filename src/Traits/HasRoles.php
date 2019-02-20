@@ -3,48 +3,33 @@
 namespace Bu4ak\Roles\Traits;
 
 use Bu4ak\Roles\Enum\RoleType;
-use Exception;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Trait HasRoles.
  *
  * @property int $role_id
+ * @method static Builder admins()
+ * @method static Builder managers()
+ * @method static Builder users()
  */
 trait HasRoles
 {
-    /**
-     * @throws Exception
-     *
-     * @return bool
-     */
     public function isAdmin(): bool
     {
         return $this->role_id === RoleType::ADMIN;
     }
 
-    /**
-     * @throws Exception
-     *
-     * @return bool
-     */
     public function isManager(): bool
     {
         return $this->role_id >= RoleType::MANAGER;
     }
 
-    /**
-     * @throws Exception
-     *
-     * @return bool
-     */
     public function isUser(): bool
     {
-        return $this->role_id === RoleType::USER;
+        return $this->role_id >= RoleType::USER;
     }
 
-    /**
-     * @return int
-     */
     public function getRoleIdAttribute(): int
     {
         if (!isset($this->attributes['role_id'])) {
@@ -54,14 +39,25 @@ trait HasRoles
         return (int)$this->attributes['role_id'];
     }
 
-    /**
-     * @param int $roleId
-     * @return bool
-     */
     public function assignRole(int $roleId): bool
     {
         $this->role_id = $roleId;
 
         return $this->save();
+    }
+
+    public function scopeAdmins(Builder $query)
+    {
+        return $query->where('role_id', RoleType::ADMIN);
+    }
+
+    public function scopeManagers(Builder $query)
+    {
+        return $query->where('role_id', RoleType::MANAGER);
+    }
+
+    public function scopeUsers(Builder $query)
+    {
+        return $query->where('role_id', RoleType::USER);
     }
 }
