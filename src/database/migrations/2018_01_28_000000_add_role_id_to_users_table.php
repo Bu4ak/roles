@@ -1,6 +1,6 @@
 <?php
 
-use Bu4ak\Roles\Enum\RoleType;
+use Bu4ak\Roles\Enums\RoleType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
 

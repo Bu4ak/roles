@@ -44,7 +44,7 @@ class BaseMiddleware
     public function handle($request, Closure $next)
     {
         $this->auth->authenticate();
-
+        // 🧙
         if ($request->user()->{$this->methodName}()) {
             return $next($request);
         }

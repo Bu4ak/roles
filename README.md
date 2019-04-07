@@ -26,7 +26,7 @@ and add middleware `admin` (`manager` or `user`) to route:
 ```php
 Route::get('/', function () {
     return view('welcome');
-})->middleware('admin');
+})->middleware(MiddlewareType::ADMIN);
 ```
 #### Also:
 You can check user's role

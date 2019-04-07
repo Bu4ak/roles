@@ -1,6 +1,6 @@
 <?php
 
-namespace Bu4ak\Roles\Enum;
+namespace Bu4ak\Roles\Enums;
 
 /**
  * Class RoleType.
